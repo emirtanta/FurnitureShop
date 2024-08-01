@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+
+
+<body>
+
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Hizmetlerimiz</h1>
+                        <p class="mb-4">Ev dekorasyonunuzu bir üst seviyeye taşımak için geniş bir mobilya koleksiyonu sunuyoruz. Modern ve konforlu tasarımlarımızla yaşam alanlarınıza şıklık katın. Her zevke hitap eden seçeneklerimizle evinizde sıcak ve davetkar bir atmosfer yaratın. Kalite ve şıklığı bir arada bulabileceğiniz ürünlerimizle yaşam alanlarınızı yeniden şekillendirin.</p>
+                        <p><a href="#" class="btn btn-secondary me-2">Şimdi Al</a><a href="#" class="btn btn-white-outline">Keşfet</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="hero-img-wrap">
+                        <img src="~/furni-1.0.0/images/couch.png" class="img-fluid" alt="Modern Koltuk">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @await Component.InvokeAsync("_DefaultServiceComponents");
+
+    @await Component.InvokeAsync("_DefaultPopulerProductComponents");
+
+
+    @await Component.InvokeAsync("_DefaultTestimonailComponents");
+
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>
+

@@ -1,0 +1,47 @@
+﻿@model Subscriber
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="subscription-form">
+            <h3 class="d-flex align-items-center">
+                <span class="me-1"><img src="~/furni-1.0.0/images/envelope-outline.svg" alt="Image" class="img-fluid"></span>
+                <span>Abone Ol</span>
+            </h3>
+
+            <form id="subscriptionForm" method="post" asp-action="Subscribe" asp-controller="Subscribe" class="row g-3">
+                <div class="col-auto">
+                    <input type="text" asp-for="Name" class="form-control" placeholder="İsim Soyisim Giriniz">
+                </div>
+                <div class="col-auto">
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Email Giriniz">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="fa fa-paper-plane"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+</style>
+
+
+<script>
+    document.getElementById('subscriptionForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        createSubscriber();
+    });
+
+    function createSubscriber() {
+        Swal.fire({
+            title: "Abonelik Olışturuldu !",
+            text: "Butona Tıklayınız.",
+            icon: "success"
+        });
+    }</script>

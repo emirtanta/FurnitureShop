@@ -1,0 +1,188 @@
+﻿@model List<SocialMedia>
+@{
+    ViewData["Title"] = "Sosyal Medya Listesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <h4 class="card-title">Sosyal Medya Hesaplarımız</h4>
+                <form method="get" action="@Url.Action("CreateSocialMedia", "SocialMedia")" class="ms-auto">
+                    <button type="submit" class="btn btn-primary btn-round">
+                        <i class="fa fa-plus"></i> Ekle
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Add Modal -->
+            <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title">
+                                <span class="fw-mediumbold"> Yeni</span>
+                                <span class="fw-light"> Abone </span>
+                            </h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="small">Yeni bir abone oluşturmak için bu formu kullanın, tüm alanları doldurduğunuzdan emin olun.</p>
+                            <form asp-action="AddSocialMedia" asp-controller="SocialMedia" method="post">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-group-default">
+                                            <label>Icon</label>
+                                            <select id="addIcon" name="Icon" class="form-control" required>
+                                                <option value="fa fa-facebook">Facebook</option>
+                                                <option value="fa fa-twitter">Twitter</option>
+                                                <option value="fa fa-instagram">Instagram</option>
+                                                <option value="fa fa-linkedin">LinkedIn</option>
+                                                <option value="fa fa-youtube">YouTube</option>
+                                                <option value="fa fa-pinterest">Pinterest</option>
+                                                <option value="fa fa-snapchat">Snapchat</option>
+                                                <option value="fa fa-tiktok">TikTok</option>
+                                                <option value="fa fa-whatsapp">WhatsApp</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pe-0">
+                                        <div class="form-group form-group-default">
+                                            <label>Ad</label>
+                                            <input id="addName" name="Name" type="text" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>Url</label>
+                                            <input id="addUrl" name="Url" type="text" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="submit" class="btn btn-primary">Ekle</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kapat</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title">
+                                <span class="fw-mediumbold"> Güncelle</span>
+                                <span class="fw-light"> Abone </span>
+                            </h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="small">Abone bilgilerini güncellemek için bu formu kullanın, tüm alanları doldurduğunuzdan emin olun.</p>
+                            <form asp-action="EditSocialMedia" asp-controller="SocialMedia" method="post">
+                                <input type="hidden" id="editId" name="SocialMediaID" />
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-group-default">
+                                            <label>Icon</label>
+                                            <select id="editIcon" name="Icon" class="form-control" required>
+                                                <option value="fa fa-facebook">Facebook</option>
+                                                <option value="fa fa-twitter">Twitter</option>
+                                                <option value="fa fa-instagram">Instagram</option>
+                                                <option value="fa fa-linkedin">LinkedIn</option>
+                                                <option value="fa fa-youtube">YouTube</option>
+                                                <option value="fa fa-pinterest">Pinterest</option>
+                                                <option value="fa fa-snapchat">Snapchat</option>
+                                                <option value="fa fa-tiktok">TikTok</option>
+                                                <option value="fa fa-whatsapp">WhatsApp</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pe-0">
+                                        <div class="form-group form-group-default">
+                                            <label>Ad</label>
+                                            <input id="editName" name="Name" type="text" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>Url</label>
+                                            <input id="editUrl" name="Url" type="text" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kapat</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="add-row" class="display table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ikon</th>
+                            <th>İsim</th>
+                            <th>Url</th>
+                            <th style="width: 15%">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var subscriber in Model)
+                        {
+                            <tr>
+                                <td><i class="@subscriber.Icon"></i></td>
+                                <td>@subscriber.Name</td>
+                                <td><a href="@subscriber.Url" target="_blank">@subscriber.Url</a></td>
+                                <td>
+                                    <div class="form-button-action">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#editRowModal" class="btn btn-link btn-primary btn-lg" onclick="editSubscriber('@subscriber.SocialMediaId', '@subscriber.Icon', '@subscriber.Name', '@subscriber.Url')">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <form asp-action="DeleteSocialMedia" asp-controller="SocialMedia" method="post" style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@subscriber.SocialMediaId" />
+                                            <button type="submit" data-bs-toggle="tooltip" title="Remove" class="btn btn-link btn-danger">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!confirm('Bu öğeyi silmek istediğinizden emin misiniz?')) {
+                event.preventDefault();
+            }
+        });
+    });
+
+    function editSubscriber(id, icon, name, url) {
+        document.getElementById('editId').value = id;
+        document.getElementById('editIcon').value = icon;
+        document.getElementById('editName').value = name;
+        document.getElementById('editUrl').value = url;
+    }</script>
+

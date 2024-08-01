@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<div>
+    @await Html.PartialAsync("~/Views/Subscribe/Subscribe.cshtml", new FurnitureShop.Entities.Subscriber())
+</div>
+

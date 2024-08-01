@@ -1,0 +1,60 @@
+﻿@model List<UserMessage>
+@{
+    Layout = "~/Views/AdminLayout";
+    ViewData["Title"] = "Gelen Mesajlar";
+}
+
+<div class="container mt-10 pt-5">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">@ViewData["Title"]</h4>
+        </div>
+    </div>
+
+    <div class="card-body">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="d-flex-1 ms-3">
+                    <div class="avatar avatar-online">
+                        <span class="avatar-title rounded-circle border border-white bg-info">
+                            @item.Name.Substring(0, 1) @item.Surname.Substring(0, 1)
+                        </span>
+                    </div>
+
+                    <div class="flex-1 ms-3 pt-1">
+                        <h6 class="text-uppercase fw-bold mb-1">@item.Name @item.Surname</h6>
+                    </div>
+                    @if (!string.IsNullOrEmpty(item.Subject))
+                    {
+                        <div class="text-warning mb-1">
+                            <strong>Konu: </strong>
+                            @item.Subject
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Email))
+                    {
+                        <div class="text-muted">
+                            <strong>Mesaj:</strong> @item.Email
+                        </div>
+                    }
+
+                    <div class="text-muted">
+                        <strong>Mesaj: </strong> @item.Content
+                    </div>
+
+                </div>
+
+                <div class="seperator-dashed"></div>
+            }
+        }
+
+        else
+        {
+            <p>Gelen mesaj bulunmamaktadır</p>
+        }
+    </div>
+</div>
+
+

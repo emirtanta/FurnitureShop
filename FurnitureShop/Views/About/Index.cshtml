@@ -1,0 +1,44 @@
+﻿@model List<About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+
+
+<body>
+
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Hakkımızda</h1>
+                        <p class="mb-4">Biz, ev dekorasyonunda mükemmeliyeti hedefleyen bir mobilya markasıyız. Yılların deneyimiyle tasarladığımız modern ve fonksiyonel ürünlerle, yaşam alanlarınızı kişiselleştirmeyi amaçlıyoruz. Kaliteli malzemeler ve şık tasarımlarımızla, her türlü ihtiyaca uygun çözümler sunuyoruz. Müşteri memnuniyetini ön planda tutarak, en iyi hizmeti sağlamak için sürekli olarak kendimizi geliştiriyoruz.</p>
+                        <p><a href="#" class="btn btn-secondary me-2">Ürünlerimizi İnceleyin</a><a href="#" class="btn btn-white-outline">Keşfet</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="hero-img-wrap">
+                        <img src="~/furni-1.0.0/images/couch.png" class="img-fluid" alt="Şık Mobilya">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @await Component.InvokeAsync("_DefaultServiceComponents");
+
+    @await Component.InvokeAsync("_DefaultTeamComponent");
+
+
+    @await Component.InvokeAsync("_DefaultTestimonailComponents");
+
+
+</body>
+
+</html>
+
